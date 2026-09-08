@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071019"><meta name="description" content="FX Analyses dual AI signal dashboard">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>FX Analyses</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+<header class="topbar">
+  <div class="brand" id="brandClick">
+    <img id="brandLogo" class="brand-logo" src="https://i.ibb.co.com/vx61sp6H/logo.png" alt="FX Analyses logo" onerror="this.style.display='none'">
+    <div class="brand-mark">FX</div><div><div class="brand-name">FX <span>ANALYSES</span></div><div class="brand-sub">DUAL AI SIGNAL TERMINAL</div></div>
+  </div>
+  <div class="top-actions"><div id="liveClock" class="live-clock">--:--:--</div><button id="soundBtn" class="icon-btn">🔊</button></div>
+</header>
+
+<main class="dashboard">
+<section class="panel market-panel">
+ <div class="panel-head"><div><div class="eyebrow">MARKET</div><h1 id="selectedMarket">EUR/USD (OTC)</h1></div><div class="status-pill"><i></i> LIVE DATA ADAPTER</div></div>
+ <div class="market-selector"><button id="marketButton" class="selector-btn"><span id="marketButtonText">EUR/USD (OTC)</span><span>⌄</span></button>
+ <div id="marketMenu" class="market-menu hidden"><div class="market-search-wrap"><input id="marketSearch" placeholder="মার্কেট খুঁজুন..."></div><div id="marketGroups"></div></div></div>
+ <div class="chart-card">
+  <div class="chart-toolbar"><div class="price-box"><span class="small-label">PRICE</span><strong id="price">1.08420</strong><span id="priceChange" class="up">—</span></div>
+  <div class="timeframes" id="timeframes"><button data-tf="1" class="tf active">1M</button><button data-tf="5" class="tf">5M</button><button data-tf="15" class="tf">15M</button></div></div>
+  <canvas id="chart"></canvas><div class="chart-footer"><span id="candleLabel">বর্তমান candle</span><span class="countdown"><b id="countdown">00:59</b> বাকি</span></div>
+ </div>
+ <div class="signal-controls"><div class="next-candle"><span class="small-label">NEXT CANDLE</span><strong id="nextCandleTime">--:--:--</strong><span id="nextCandleMeta">পরের candle-কে target করা হবে</span></div>
+ <button id="signalBtn" class="signal-btn"><span class="signal-dot"></span> SIGNAL ACTIVE</button></div>
+
+ <div id="analysisBox" class="analysis-box hidden">
+   <div class="analysis-head"><b>⚡ Dual AI Analysis</b><span id="analysisTimer">Analyzing...</span></div>
+   <div class="ai-grid">
+    <div class="ai-card"><div class="ai-title">OPENAI</div><div id="openaiStatus">অপেক্ষা করছে...</div><div class="mini-progress"><i></i></div></div>
+    <div class="ai-card"><div class="ai-title">GEMINI</div><div id="geminiStatus">অপেক্ষা করছে...</div><div class="mini-progress"><i></i></div></div>
+   </div>
+   <div class="checks" id="checks"></div>
+ </div>
+
+ <div id="signalCard" class="signal-card idle"><div class="signal-icon">✦</div><div class="signal-content"><div class="small-label">FINAL NEXT-CANDLE SIGNAL</div><div id="signalDirection" class="signal-direction">LOGIN REQUIRED</div><div id="signalText">Signal নিতে Login করুন।</div></div><div class="signal-expiry"><span>ENTRY</span><b id="signalEntryTime">--:--</b></div></div>
+
+ <div class="notice"><b>⚠ গুরুত্বপূর্ণ</b><span>এটি কোনো guaranteed profit system নয়। AI confidence/সম্ভাবনা estimate মাত্র। Quotex-এর private OTC candle সরাসরি browser থেকে নির্ভরযোগ্যভাবে পড়ার জন্য lawful live-data feed/API দরকার।</span></div>
+</section>
+
+<aside class="panel assistant-panel">
+ <div class="assistant-hero"><div class="bot-orb"><div class="bot-face">AI</div></div><div><div class="eyebrow">FX ANALYSES</div><h2>Dual AI Assistant</h2><p id="assistantStatus">Login করে analysis শুরু করুন।</p></div></div>
+ <div class="assistant-body">
+  <div class="quote-row"><span>Asset</span><b id="sideMarket">EUR/USD (OTC)</b></div><div class="quote-row"><span>Timeframe</span><b id="sideTimeframe">1 minute</b></div><div class="quote-row"><span>Current candle</span><b id="sideCountdown">00:59</b></div><div class="quote-row"><span>Next candle</span><b id="sideNext">--:--:--</b></div>
+  <div class="analysis-list"><b>যা check হবে</b><span>Trend / EMA / SMA / RSI / MACD / Support-Resistance / Momentum / Volatility / Candle Structure / Candlestick Patterns / Breakout / Pullback / Wick & Body / Higher-High-Lower-Low / Multi-timeframe context / AI agreement</span></div>
+  <button id="speakBtn" class="talk-btn">🎙 বাংলা Voice</button>
+  <div class="chat" id="chat"><div class="chat-msg bot">স্বাগতম। Signal নিতে নিচের SIGNAL ACTIVE চাপুন—প্রথমে Login চাইবে।</div></div>
+  <div class="chat-input"><input id="chatInput" placeholder="AI-কে প্রশ্ন করুন..." maxlength="300"><button id="sendBtn">➤</button></div>
+ </div>
+</aside>
+</main>
+</div>
+
+<button id="loginFab" class="login-fab">🔐 Login</button>
+
+<div id="loginModal" class="modal hidden"><div class="modal-card"><button class="modal-close" data-close="loginModal">×</button><div class="modal-icon">🔐</div><h2>FX Analyses Login</h2><p>Admin key বা generated user key দিন।</p><input id="loginKey" placeholder="Login key"><button id="loginSubmit" class="primary">LOGIN</button><div id="loginError" class="error"></div></div></div>
+
+<div id="adminModal" class="modal hidden"><div class="modal-card admin-card"><button class="modal-close" data-close="adminModal">×</button><div class="admin-head"><div><div class="eyebrow">ADMIN PANEL</div><h2>Key Management</h2></div><button id="adminLogout" class="danger">Logout</button></div>
+ <div class="gen-row"><select id="keyDuration"><option value="10">10 মিনিট</option><option value="15">15 মিনিট</option><option value="20">20 মিনিট</option><option value="60">1 ঘণ্টা</option><option value="120">2 ঘণ্টা</option><option value="180">3 ঘণ্টা</option><option value="300">5 ঘণ্টা</option><option value="720">12 ঘণ্টা</option><option value="1440">24 ঘণ্টা</option><option value="43200">1 মাস</option></select><button id="generateKey" class="primary">Generate Key</button></div>
+ <div id="keysList" class="keys-list"></div>
+</div></div>
+
+<div id="toast" class="toast"></div>
+<script src="app-config.js"></script><script src="app.js"></script>
+</body></html>

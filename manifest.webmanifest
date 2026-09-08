@@ -1,0 +1,17 @@
+{
+  "name": "FX Analyses",
+  "short_name": "FX Analyses",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#05090e",
+  "theme_color": "#071019",
+  "description": "Dual AI market analysis dashboard",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
